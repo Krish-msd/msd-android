@@ -1,7 +1,16 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
+}
+
+// Load environment variables from .env file
+val envFile = rootProject.file(".env")
+val envProperties = Properties()
+if (envFile.exists()) {
+    envFile.inputStream().use { envProperties.load(it) }
 }
 
 android {
@@ -9,7 +18,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mysillydeams.app"
+        applicationId = "com.mysillydreams"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -19,6 +28,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        // Add BuildConfig fields for secure configuration
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${envProperties.getProperty("GOOGLE_WEB_CLIENT_ID", "")}\"")
+        buildConfigField("String", "FIREBASE_PROJECT_ID", "\"${envProperties.getProperty("FIREBASE_PROJECT_ID", "")}\"")
+        buildConfigField("String", "FIREBASE_API_KEY", "\"${envProperties.getProperty("FIREBASE_API_KEY", "")}\"")
     }
 
     buildTypes {
@@ -39,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
@@ -67,11 +82,13 @@ dependencies {
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
-    // Google Sign-In (commented out until google-services.json is added)
-    // implementation("com.google.android.gms:play-services-auth:20.7.0")
-    // implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
-    // implementation("com.google.firebase:firebase-bom:32.7.0")
+    // Firebase and Google Sign-In
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     // Animations
     implementation("androidx.compose.animation:animation:1.5.4")
@@ -81,6 +98,9 @@ dependencies {
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Image Loading
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

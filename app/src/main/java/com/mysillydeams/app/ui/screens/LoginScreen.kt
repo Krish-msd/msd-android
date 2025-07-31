@@ -30,11 +30,13 @@ import com.mysillydeams.app.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onGoogleSignIn: () -> Unit = {},
+    isLoading: Boolean = false
+) {
     val context = LocalContext.current
     val isDark = isSystemInDarkTheme()
-    
-    var isLoading by remember { mutableStateOf(false) }
+
     var showToast by remember { mutableStateOf<String?>(null) }
     var logoAnimated by remember { mutableStateOf(false) }
     
@@ -71,9 +73,7 @@ fun LoginScreen() {
     
     // Handle Google Sign-In
     val handleGoogleSignIn = {
-        isLoading = true
-        // Simulate sign-in process
-        // In real app, implement Google Sign-In here
+        onGoogleSignIn()
     }
     
     Box(

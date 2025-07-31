@@ -1,12 +1,10 @@
 package com.mysillydeams.app
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -27,12 +25,6 @@ class MainActivity : ComponentActivity() {
 
     private val authViewModel: AuthViewModel by viewModels {
         AuthViewModelFactory(this)
-    }
-
-    private val googleSignInLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        authViewModel.handleSignInResult(result.data)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +70,7 @@ class MainActivity : ComponentActivity() {
                             // Show loading screen or keep current screen
                             if (currentUser == null) {
                                 LoginScreen(
-                                    onGoogleSignIn = { handleGoogleSignIn() },
+                                    onGoogleSignIn = { authViewModel.signInWithGoogle() },
                                     isLoading = uiState.isLoading
                                 )
                             } else {
@@ -96,13 +88,13 @@ class MainActivity : ComponentActivity() {
                         }
                         is AuthState.Unauthenticated -> {
                             LoginScreen(
-                                onGoogleSignIn = { handleGoogleSignIn() },
+                                onGoogleSignIn = { authViewModel.signInWithGoogle() },
                                 isLoading = uiState.isLoading
                             )
                         }
                         is AuthState.Error -> {
                             LoginScreen(
-                                onGoogleSignIn = { handleGoogleSignIn() },
+                                onGoogleSignIn = { authViewModel.signInWithGoogle() },
                                 isLoading = uiState.isLoading
                             )
                         }
@@ -110,11 +102,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    private fun handleGoogleSignIn() {
-        authViewModel.signInWithGoogle()
-        val signInIntent = authViewModel.getGoogleSignInIntent()
-        googleSignInLauncher.launch(signInIntent)
     }
 }

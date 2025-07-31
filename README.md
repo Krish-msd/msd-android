@@ -1,53 +1,51 @@
 # MySillyDreams Android App
 
-A beautiful Android application built with Kotlin and Jetpack Compose, featuring the same design style and components as the web version.
+A beautiful Android application with Google OAuth authentication, featuring modern neumorphic design and secure credential management.
 
-## Features
+## 🚀 Features
 
 ### 🎨 Design & UI
 - **Neumorphic Design**: Beautiful neumorphic components matching the web version
-- **Dark/Light Theme**: Automatic theme switching with smooth transitions
-- **Animated Elements**: Smooth animations and transitions throughout the app
 - **Material Design 3**: Modern Material Design components and theming
+- **Responsive Layout**: Optimized for all screen sizes and orientations
+- **Smooth Animations**: Elegant transitions and loading states
 
 ### 🔐 Authentication
-- **Google Sign-In**: Seamless Google authentication integration
-- **Loading States**: Beautiful loading animations during sign-in
-- **Error Handling**: Graceful error handling with toast messages
+- **Google OAuth**: Secure authentication using Google's Credential Manager API
+- **Firebase Integration**: Industry-standard authentication backend
+- **Secure Configuration**: Environment-based credential management
+- **Cross-Device Support**: Works on emulators and physical devices
 
-### 📱 Mobile-First Features
-- **Responsive Design**: Optimized for all screen sizes
-- **Touch Interactions**: Smooth touch feedback and gestures
-- **System Integration**: Proper status bar and navigation handling
+### 📱 Architecture
+- **MVVM Pattern**: Clean separation of concerns with reactive state management
+- **Jetpack Compose**: Modern declarative UI framework
+- **StateFlow**: Reactive authentication state management
+- **Error Handling**: Comprehensive error handling and user feedback
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose
-- **Architecture**: MVVM with Compose
-- **Authentication**: Firebase Auth + Google Sign-In
-- **Animations**: Compose Animation APIs
-- **Theme**: Material Design 3 with custom neumorphic components
+- **Architecture**: MVVM with StateFlow
+- **Authentication**: Firebase Auth + Credential Manager
+- **Security**: Environment variables with BuildConfig
+- **Design**: Material Design 3 with neumorphic components
 
-## Project Structure
+## 📋 Project Structure
 
 ```
-app/
-├── src/main/java/com/mysillydeams/app/
-│   ├── MainActivity.kt                 # Main activity
-│   ├── ui/
-│   │   ├── theme/                     # Theme and styling
-│   │   │   ├── Color.kt               # Color definitions
-│   │   │   ├── Theme.kt               # Theme configuration
-│   │   │   └── Type.kt                # Typography
-│   │   ├── components/                # Reusable UI components
-│   │   │   └── NeumorphicComponents.kt # Neumorphic design components
-│   │   └── screens/                   # App screens
-│   │       └── LoginScreen.kt         # Login screen implementation
-│   └── res/                          # Resources
-│       ├── values/                   # Values and strings
-│       ├── drawable/                 # Icons and drawables
-│       └── mipmap/                   # App icons
+app/src/main/java/com/mysillydeams/app/
+├── auth/                   # Authentication logic
+│   ├── AuthRepository.kt   # Authentication data layer
+│   ├── AuthViewModel.kt    # Authentication view model
+│   └── AuthState.kt        # Authentication state definitions
+├── config/                 # Configuration management
+│   └── AppConfig.kt        # Secure configuration access
+├── ui/                     # User interface
+│   ├── components/         # Reusable UI components
+│   ├── screens/           # App screens (LoginScreen, HomeScreen)
+│   └── theme/             # Design system
+└── MainActivity.kt         # Main activity
 ```
 
 ## Design Features
@@ -68,77 +66,109 @@ app/
 - **Neumorphic Shadows**: Soft shadows for depth
 - **Theme Support**: Automatic dark/light mode switching
 
-## Building the Project
+## 🚀 Setup Instructions
 
 ### Prerequisites
-- Android Studio Arctic Fox or later
-- JDK 11 or later
-- Android SDK 24+ (Android 7.0)
+- **Android Studio**: Arctic Fox or later
+- **JDK**: 11 or later
+- **Android SDK**: API level 24 (Android 7.0) or higher
+- **Google Play Services**: Required for authentication
 
-### Build Commands
+### 1. Clone and Setup
+```bash
+git clone <repository-url>
+cd MySillyDreams/frontend/mobile
+```
+
+### 2. Configure Environment Variables
+Create a `.env` file in the project root:
+
+```env
+# Google OAuth Configuration
+GOOGLE_WEB_CLIENT_ID=your-web-client-id-here
+
+# Firebase Configuration
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_PROJECT_NUMBER=your-project-number
+FIREBASE_API_KEY=your-api-key
+
+# App Configuration
+APP_PACKAGE_NAME=com.mysillydreams
+```
+
+**Important**: The `.env` file is excluded from version control. You must create this file with your Firebase configuration values.
+
+### 3. Firebase Setup
+1. **Create Firebase Project**: Go to [Firebase Console](https://console.firebase.google.com/)
+2. **Add Android App**: Use package name `com.mysillydreams`
+3. **Download google-services.json**: Place in `app/` directory
+4. **Enable Authentication**: Enable Google sign-in method
+5. **Add SHA-1 Fingerprint**: Add your debug/release SHA-1 fingerprints
+
+### 4. Build and Run
 ```bash
 # Debug build
 ./gradlew assembleDebug
 
-# Release build
-./gradlew assembleRelease
-
-# Install on device
+# Install on connected device
 ./gradlew installDebug
+
+# Generate SHA-1 fingerprint
+./gradlew signingReport
 ```
 
-### Dependencies
-- Jetpack Compose BOM 2023.10.01
-- Material Design 3
-- Firebase Auth
-- Google Play Services Auth
-- Accompanist System UI Controller
-- Kotlin Coroutines
+## 🔐 Security Features
 
-## Configuration
+- **Environment Variables**: Sensitive data stored securely outside source code
+- **BuildConfig Integration**: Runtime access to configuration values
+- **Credential Manager**: Modern Android authentication API
+- **Firebase Security**: Industry-standard authentication backend
+- **Git Security**: Sensitive files excluded from version control
 
-### Firebase Setup
-1. Add your `google-services.json` file to `app/` directory
-2. Configure Firebase Authentication in the Firebase Console
-3. Enable Google Sign-In provider
+## 🧪 Testing
 
-### Theme Customization
-- Modify colors in `ui/theme/Color.kt`
-- Adjust typography in `ui/theme/Type.kt`
-- Update theme configuration in `ui/theme/Theme.kt`
+### Debug Testing
+```bash
+# Generate debug SHA-1 fingerprint
+./gradlew signingReport
 
-## Features Matching Web Version
+# Install debug APK
+./gradlew installDebug
 
-### Visual Design
-- ✅ Neumorphic card design
-- ✅ Gradient backgrounds
-- ✅ Brand color scheme
-- ✅ Typography hierarchy
-- ✅ Icon consistency
+# View logs
+adb logcat | grep MySillyDreams
+```
 
-### Interactions
-- ✅ Google Sign-In button
-- ✅ Theme toggle functionality
-- ✅ Loading states
-- ✅ Error handling
-- ✅ Toast messages
+### Supported Devices
+- **Minimum SDK**: API 24 (Android 7.0)
+- **Target SDK**: API 34 (Android 14)
+- **Architecture**: ARM64, ARM, x86, x86_64
+- **Screen Sizes**: Phone, Tablet, Foldable
 
-### Animations
-- ✅ Logo entrance animation
-- ✅ Content fade-in effects
-- ✅ Button press feedback
-- ✅ Background animations
-- ✅ Smooth transitions
+## 🚨 Troubleshooting
 
-## Future Enhancements
+### Common Issues
+1. **Build Errors**: Ensure all dependencies are synced
+2. **Authentication Fails**: Check SHA-1 fingerprint in Firebase Console
+3. **Configuration Missing**: Verify `.env` file exists with correct values
+4. **Google Play Services**: Ensure updated on test device
 
-- [ ] Video player integration
-- [ ] Content browsing screens
-- [ ] User profile management
-- [ ] Push notifications
-- [ ] Offline support
-- [ ] Social features
+### Debug Commands
+```bash
+# Clean build
+./gradlew clean assembleDebug
 
-## License
+# Check configuration
+./gradlew processDebugGoogleServices
+
+# View detailed logs
+adb logcat | grep MySillyDreams
+```
+
+## 📄 License
 
 This project is part of the MySillyDreams platform.
+
+---
+
+**Note**: This app requires proper Firebase configuration to function. Ensure you have completed the Firebase setup steps before building and testing.

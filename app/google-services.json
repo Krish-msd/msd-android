@@ -1,49 +1,50 @@
 {
   "project_info": {
-    "project_number": "960066965807",
-    "project_id": "mysillydreams",
-    "storage_bucket": "mysillydreams.firebasestorage.app"
+    "project_number": "546347981310",
+    "project_id": "mysillydreams-20e8c",
+    "storage_bucket": "mysillydreams-20e8c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:960066965807:android:4351c60dc34adc3fa691da",
+        "mobilesdk_app_id": "1:546347981310:android:c2d63f5f13b238ef9048af",
         "android_client_info": {
           "package_name": "com.mysillydreams"
         }
       },
       "oauth_client": [
         {
-          "client_id": "960066965807-254aam32ii1rhheeuj5e7qb6fsiokpgb.apps.googleusercontent.com",
+          "client_id": "546347981310-a1ra9pepj1u54u8avmtt140540h2m80n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mysillydreams",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+            "certificate_hash": "64a98fd37aebbcea388b98c34a07ba9876e7b35a"
           }
         },
         {
-          "client_id": "960066965807-fiphild0ge6m0ggv8fkl653prpepqulo.apps.googleusercontent.com",
+          "client_id": "546347981310-dk7gneom3b1k9s0t4ib7598d3q17mpe8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mysillydreams",
+            "certificate_hash": "f0ecfdeb618d5819fd0624f311096b2effa22f79"
+          }
+        },
+        {
+          "client_id": "546347981310-cl4nh18aft4losqvguosaso0jtkkv2gj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5ntEhXPMNCRP-xk5SBttEWjILrsbo42A"
+          "current_key": "AIzaSyDBYtyjmPStfm_a79RdRsEM3ZjD61VlHSU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "960066965807-2k0djm1ma4634j1vl2t9g3o8r5dlt3ua.apps.googleusercontent.com",
+              "client_id": "546347981310-cl4nh18aft4losqvguosaso0jtkkv2gj.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "960066965807-5enltud6vdtfkp4uf3kbbcc93jvgvet9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mysillydreams"
-              }
             }
           ]
         }

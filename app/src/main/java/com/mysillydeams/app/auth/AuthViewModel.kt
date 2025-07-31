@@ -1,7 +1,6 @@
 package com.mysillydeams.app.auth
 
 import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -25,25 +24,6 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
 
             authRepository.signInWithGoogle()
                 .onSuccess {
-                    // Success is handled in the activity result callback
-                }
-                .onFailure { exception ->
-                    _uiState.value = _uiState.value.copy(
-                        isLoading = false,
-                        errorMessage = exception.message ?: "Sign in failed"
-                    )
-                }
-        }
-    }
-
-    fun getGoogleSignInIntent(): Intent {
-        return authRepository.getGoogleSignInIntent()
-    }
-    
-    fun handleSignInResult(data: Intent?) {
-        viewModelScope.launch {
-            authRepository.handleSignInResult(data)
-                .onSuccess { user ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         errorMessage = null
@@ -57,6 +37,8 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
                 }
         }
     }
+    
+
     
     fun signOut() {
         authRepository.signOut()
